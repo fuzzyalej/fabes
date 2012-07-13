@@ -1,6 +1,9 @@
 source "http://rubygems.org"
 
+gem 'redis'
+
 group :development do
+  gem "mocha"
   gem "shoulda", ">= 0"
   gem "rdoc", "~> 3.12"
   gem "bundler", "> 1.0.0"

@@ -1,21 +1,17 @@
 require 'simplecov'
-SimpleCov.start
-
-require 'rubygems'
-require 'bundler'
-begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
+SimpleCov.start do
+  add_filter '/test/'
 end
+
 require 'test/unit'
 require 'shoulda'
+require 'mocha'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'fabes'
 
-class Test::Unit::TestCase
+def session
+    @session ||= {}
 end
