@@ -14,7 +14,8 @@ module Fabes
   module ConnectionAdapters
     class AbstractAdapter
       def clear!;end
-      def save_experiment;end
+      def save_experiment(experiment);end
+      def find_experiment(name);end
     end
   end
 end

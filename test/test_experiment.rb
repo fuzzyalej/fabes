@@ -46,14 +46,22 @@ class TestExperiment < Test::Unit::TestCase
     end
   end
 
+  context 'save' do
+    should 'save the experiment' do
+      experiment = Fabes::Experiment.new 'test', 'yay'
+      Fabes.stubs(db: mock(:save_experiment))
+
+      experiment.save
+    end
+  end
+
   context 'find' do
-    #TODO: To uncomment when the DB access is ready
-    #should 'find the given experiment' do
-    #  Fabes::Experiment.new 'test', 'yay'
-    #  experiment = Fabes::Experiment.find 'test'
-    #  assert_not_nil experiment
-    #  assert_equal experiment.name, 'test'
-    #end
+    should 'find the given experiment' do
+      Fabes::Experiment.new 'test', 'yay'
+      experiment = Fabes::Experiment.find 'test'
+      assert_not_nil experiment
+      assert_equal experiment.name, 'test'
+    end
 
     should 'return nil when experiment not found' do
     end

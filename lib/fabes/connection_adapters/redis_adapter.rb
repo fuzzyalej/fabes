@@ -25,6 +25,14 @@ module Fabes
         raise "Unable to save experiment"
       end
 
+      def find_experiment(name)
+        if @redis.sismember "#{NAMESPACE}:experiments", name
+          load_experiment(name)
+        else
+          nil
+        end
+      end
+
       private
 
       def add_to_current_experiments(name)
@@ -43,6 +51,16 @@ module Fabes
           end
           @redis.hmset "#{NAMESPACE}:alternatives:#{base}:#{alt.id}", *data
         end
+      end
+
+      def load_experiment(name)
+        #TODO: WIP
+        #1: create experiment
+        #1.1: load it with db data
+        #2: create alternatives for that experiment
+        #2.1: load each alternative with db data
+        #3: add the alternatives to the exp
+        #4: return the exp
       end
     end
   end

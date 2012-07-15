@@ -17,6 +17,7 @@ module Fabes
 
     def self.find(name)
       #TODO: connect to the db and return the given experiment
+      Fabes.db.find_experiment name
     end
 
     def select_alternative!
