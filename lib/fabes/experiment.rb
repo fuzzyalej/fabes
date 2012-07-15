@@ -1,6 +1,6 @@
 module Fabes
   class Experiment
-    attr_accessor :name, :description
+    attr_accessor :name, :description, :alternatives
 
     def initialize(name, *alternatives)
       @name = name
@@ -16,7 +16,7 @@ module Fabes
     end
 
     def self.find(name)
-      #TODO: connect to the db and return the fiven experiment
+      #TODO: connect to the db and return the given experiment
     end
 
     def select_alternative!
@@ -29,8 +29,7 @@ module Fabes
     end
 
     def save
-      #save to the db
-      #Fabes.db.save
+      Fabes.db.save_experiment(self)
     end
   end
 

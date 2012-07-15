@@ -13,8 +13,8 @@ module Fabes
 
   module ConnectionAdapters
     class AbstractAdapter
-      def disconnect!
-      end
+      def clear!;end
+      def save_experiment;end
     end
   end
 end
