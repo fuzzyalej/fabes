@@ -64,6 +64,9 @@ class TestExperiment < Test::Unit::TestCase
     end
 
     should 'return nil when experiment not found' do
+      Fabes::Experiment.new 'test', 'yay'
+      experiment = Fabes::Experiment.find 'not_found'
+      assert_nil experiment
     end
   end
 end

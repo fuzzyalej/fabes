@@ -8,7 +8,6 @@ module Fabes
 
   module ConnectionAdapters
     class RedisAdapter < AbstractAdapter
-      NAMESPACE = 'fabes'
       def initialize(db)
         #TODO: Link here with a predefined redis and/or env variables
         @redis = ::Redis.new(db)
@@ -26,7 +25,7 @@ module Fabes
       end
 
       def find_experiment(name)
-        if @redis.sismember "#{NAMESPACE}:experiments", name
+        if @redis.sismember "fabes:experiments", name
           load_experiment(name)
         else
           nil
@@ -36,7 +35,7 @@ module Fabes
       private
 
       def add_to_current_experiments(name)
-        @redis.sadd "#{NAMESPACE}:experiments", name
+        @redis.sadd "fabes:experiments", name
       end
 
       def save_experiment_data(experiment)
@@ -45,22 +44,42 @@ module Fabes
 
       def save_alternatives(base, alternatives)
         alternatives.each do |alt|
+          add_to_alternatives(base, alt.id)
           data = Array.new
           alt.instance_variables.each do |var|
             data << var.slice(1..-1) << alt.instance_variable_get(var)
           end
-          @redis.hmset "#{NAMESPACE}:alternatives:#{base}:#{alt.id}", *data
+          @redis.hmset "fabes:alternatives_pool:#{alt.id}", *data
         end
       end
 
+      def add_to_alternatives(base, alternative)
+        @redis.sadd "fabes:alternatives:#{base}", alternative
+      end
+
       def load_experiment(name)
-        #TODO: WIP
-        #1: create experiment
-        #1.1: load it with db data
-        #2: create alternatives for that experiment
-        #2.1: load each alternative with db data
-        #3: add the alternatives to the exp
-        #4: return the exp
+        experiment = Experiment.new(name)
+        alternatives = load_alternatives(name)
+        alternatives.each do |alternative|
+          experiment.add_alternative(alternative)
+        end
+
+        experiment
+      end
+
+      def load_alternatives(base)
+        alternatives = Array.new
+        total = @redis.scard "fabes:alternatives:#{base}"
+        total.times do
+          id = @redis.spop "fabes:alternatives:#{base}"
+          alternatives.push load_alternative(id)
+        end
+        alternatives
+      end
+
+      def load_alternative(id)
+        data = @redis.hgetall "fabes:alternatives_pool:#{id}"
+        Alternative.create_from data
       end
     end
   end

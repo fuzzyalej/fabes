@@ -11,17 +11,9 @@ class TestHelper < Test::Unit::TestCase
     assert self.respond_to? :score!
   end
 
-  #fabes
   should 'return a valid alternative' do
     alternative = fabes 'test experiment', 1, 2, 3
     assert_not_nil alternative
-    assert_equal alternative.class, Fixnum
+    assert %w(1 2 3).include?(alternative.to_s)
   end
-
-  #score!
-  #should 'increment hits' do
-  #  fabes 'test', 1, 2
-  #  score! 'test'
-  #end
-
 end

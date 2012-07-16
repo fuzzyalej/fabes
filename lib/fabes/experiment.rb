@@ -4,19 +4,18 @@ module Fabes
 
     def initialize(name, *alternatives)
       @name = name
-      @alternatives = alternatives.each_with_index.map do |id, alternative|
-        Fabes::Alternative.new id, alternative
+      @alternatives = alternatives.map do |alternative|
+        Fabes::Alternative.new alternative
       end
       save
     end
 
     def self.find_or_create(name, *alternatives)
       #TODO: check the validation of alternatives
-      experiment = find(name) or new(name, alternatives)
+      experiment = find(name) or new(name, *alternatives)
     end
 
     def self.find(name)
-      #TODO: connect to the db and return the given experiment
       Fabes.db.find_experiment name
     end
 
@@ -31,6 +30,10 @@ module Fabes
 
     def save
       Fabes.db.save_experiment(self)
+    end
+
+    def add_alternative(alternative)
+      @alternatives.push alternative
     end
   end
 
