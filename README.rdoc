@@ -1,6 +1,6 @@
-= fabes
+= fabes {<img src="https://secure.travis-ci.org/fuzzyalej/fabes.png" />}[http://travis-ci.org/fuzzyalej/fabes]
 
-Description goes here.
+Fabes is an a/b testing gem
 
 == Contributing to fabes
  
@@ -12,8 +12,7 @@ Description goes here.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+== Sources
 
-Copyright (c) 2012 Alejandro Andres. See LICENSE.txt for
-further details.
-
+* split gem
+* vanity gem
