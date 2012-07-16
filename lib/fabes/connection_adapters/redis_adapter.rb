@@ -32,6 +32,14 @@ module Fabes
         end
       end
 
+      def increment_hits!(id)
+        @redis.hincrby "fabes:alternatives_pool:#{id}", 'hits', 1
+      end
+
+      def increment_participants!(id)
+        @redis.hincrby "fabes:alternatives_pool:#{id}", 'participants', 1
+      end
+
       private
 
       def add_to_current_experiments(name)
@@ -63,7 +71,6 @@ module Fabes
         alternatives.each do |alternative|
           experiment.add_alternative(alternative)
         end
-
         experiment
       end
 

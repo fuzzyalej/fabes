@@ -7,7 +7,7 @@ module Fabes
       alternative.increment_participants!
 
       alternative.payload
-    rescue BadAlternative => e
+    rescue
       control
     end
 

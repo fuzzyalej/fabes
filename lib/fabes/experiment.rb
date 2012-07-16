@@ -25,7 +25,7 @@ module Fabes
     end
 
     def find_alternative(id)
-      @alternatives.select {|alternative| alternative.id == id }.first or raise BadAlternative
+      @alternatives.select {|alternative| alternative.id == id }.first or control
     end
 
     def save
@@ -35,7 +35,9 @@ module Fabes
     def add_alternative(alternative)
       @alternatives.push alternative
     end
-  end
 
-  class BadAlternative < StandardError;end
+    def control
+      @alternatives.first
+    end
+  end
 end

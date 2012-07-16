@@ -11,13 +11,14 @@ module Fabes
       @payload = payload
     end
 
-    #TODO: save to redis?
     def increment_participants!
       @participants += 1
+      Fabes.db.increment_participants!(id)
     end
 
     def increment_hits!
       @hits += 1
+      Fabes.db.increment_hits!(id)
     end
 
     def self.create_from(data)

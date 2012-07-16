@@ -15,6 +15,8 @@ module Fabes
       def clear!;end
       def save_experiment(experiment);end
       def find_experiment(name);end
+      def increment_participants!(id);end
+      def increment_hits!(id);end
     end
   end
 end
