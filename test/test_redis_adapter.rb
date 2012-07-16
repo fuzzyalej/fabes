@@ -3,9 +3,11 @@ require 'redis'
 
 class TestRedisAdapter < Test::Unit::TestCase
   context 'ConnectionHandling' do
-    should 'create a new adapter' do
-      Fabes::ConnectionAdapters::RedisAdapter.expects :new
-      Fabes::ConnectionHandling.redis_connection({})
+    context 'redis_connection' do
+      should 'create a new adapter' do
+        Fabes::ConnectionAdapters::RedisAdapter.expects :new
+        Fabes::ConnectionHandling.redis_connection({})
+      end
     end
   end
 
@@ -57,6 +59,11 @@ class TestRedisAdapter < Test::Unit::TestCase
           expected_payload.include? alt.payload
         end
       end
+    end
+
+    should 'find an experiment with the correct control' do
+      found_experiment = @adapter.find_experiment('test')
+      assert_equal found_experiment.control.payload, 'a'
     end
   end
 end

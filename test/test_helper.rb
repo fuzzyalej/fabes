@@ -20,6 +20,12 @@ class TestHelper < Test::Unit::TestCase
       assert_not_nil alternative
       assert_equal alternative, 1
     end
+
+    should 'memorize options' do
+      alternative = fabes 'test experiment', 'a', 'b', 'c'
+      second_alternative = fabes 'test experiment', 'a', 'b', 'c'
+      assert_equal alternative, second_alternative
+    end
   end
 
   context 'score' do

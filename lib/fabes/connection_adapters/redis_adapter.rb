@@ -62,7 +62,7 @@ module Fabes
       end
 
       def add_to_alternatives(base, alternative)
-        @redis.sadd "fabes:alternatives:#{base}", alternative
+        @redis.rpush "fabes:alternatives:#{base}", alternative
       end
 
       def load_experiment(name)
@@ -76,11 +76,10 @@ module Fabes
 
       def load_alternatives(base)
         alternatives = Array.new
-        total = @redis.scard "fabes:alternatives:#{base}"
-        total.times do
-          id = @redis.spop "fabes:alternatives:#{base}"
-          alternatives.push load_alternative(id)
-        end
+          ids = @redis.lrange "fabes:alternatives:#{base}", 0, -1
+          ids.each do |id|
+            alternatives.push load_alternative(id)
+          end
         alternatives
       end
 
