@@ -1,4 +1,4 @@
-= fabes {<img src="https://secure.travis-ci.org/fuzzyalej/fabes.png" />}[http://travis-ci.org/fuzzyalej/fabes]
+= fabes {<img src="https://secure.travis-ci.org/fuzzyalej/fabes.png" />}[http://travis-ci.org/fuzzyalej/fabes] {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/fuzzyalej/fabes]
 
 Fabes is an a/b testing gem
 
