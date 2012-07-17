@@ -14,5 +14,5 @@ Fabes is an a/b testing gem
 
 == Sources
 
-* split gem
-* vanity gem
+* {split gem}[https://github.com/andrew/split/]
+* {vanity gem}[https://github.com/assaf/vanity/]
