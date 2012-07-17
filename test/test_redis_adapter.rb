@@ -13,29 +13,28 @@ class TestRedisAdapter < Test::Unit::TestCase
 
   context 'ConnectionAdapters' do
     setup do
-      db = {}
-      @adapter = Fabes::ConnectionAdapters::RedisAdapter.new(db)
+      @db = Redis.new
+      @adapter = Fabes::ConnectionAdapters::RedisAdapter.new(@db)
       @adapter.clear!
       @experiment = Fabes::Experiment.new 'test', 'a', 'b', 'c'
       @adapter.save_experiment(@experiment)
-      @redis = Redis.new
     end
 
     should 'clear the db' do
-      @redis.set 'test', 'yay'
+      @db.set 'test', 'yay'
       @adapter.clear!
-      assert_not_equal @redis.get('test'), 'yay'
+      assert_not_equal @db.get('test'), 'yay'
     end
 
     should 'save an experiment to the db' do
-      assert_equal @redis.scard('fabes:experiments'), 1
-      assert @redis.sismember 'fabes:experiments', 'test'
+      assert_equal @db.scard('fabes:experiments'), 1
+      assert @db.sismember 'fabes:experiments', 'test'
     end
 
     should 'save the alternatives to the db' do
       @experiment.alternatives.each do |alt|
-        assert @redis.exists "fabes:alternatives_pool:#{alt.id}"
-        data = @redis.hgetall "fabes:alternatives_pool:#{alt.id}"
+        assert @db.exists "fabes:alternatives_pool:#{alt.id}"
+        data = @db.hgetall "fabes:alternatives_pool:#{alt.id}"
         data.each do |field, value|
           assert_equal alt.send(field).to_s, value
         end

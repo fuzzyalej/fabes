@@ -2,6 +2,7 @@ module Fabes
   module ConnectionHandling
     def self.redis_connection(db)
       require 'redis'
+      db ||= ::Redis.new
       ConnectionAdapters::RedisAdapter.new(db)
     end
   end
@@ -9,8 +10,7 @@ module Fabes
   module ConnectionAdapters
     class RedisAdapter < AbstractAdapter
       def initialize(db)
-        #TODO: Link here with a predefined redis and/or env variables
-        @redis = ::Redis.new(db)
+        @redis = db
       end
 
       def clear!
