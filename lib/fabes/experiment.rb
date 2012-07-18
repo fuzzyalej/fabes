@@ -20,7 +20,6 @@ module Fabes
     end
 
     def select_alternative!
-      #TODO: Make this a real alternative selector
       @alternatives.shuffle.first
     end
 

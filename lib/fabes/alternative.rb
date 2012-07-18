@@ -12,12 +12,12 @@ module Fabes
     end
 
     def increment_participants!
-      @participants += 1
+      @participants = @participants.to_i + 1
       Fabes.db.increment_participants!(id)
     end
 
     def increment_hits!
-      @hits += 1
+      @hits = @hits.to_i + 1
       Fabes.db.increment_hits!(id)
     end
 

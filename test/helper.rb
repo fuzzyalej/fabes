@@ -15,3 +15,9 @@ require 'fabes'
 def session
     @session ||= {}
 end
+
+class Test::Unit::TestCase
+  def setup
+    Redis.new.flushdb
+  end
+end

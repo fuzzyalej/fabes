@@ -9,8 +9,8 @@ module Fabes
 
   module ConnectionAdapters
     class RedisAdapter < AbstractAdapter
-      def initialize(db)
-        @redis = db
+      def initialize(redis)
+        @redis = redis
       end
 
       def clear!

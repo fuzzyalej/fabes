@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "fabes"
   gem.homepage = "http://github.com/fuzzyalej/fabes"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Fabulous A/B Experimenting System}
+  gem.description = %Q{Fabes is an A/B testing system for your ruby projects}
   gem.email = "fuzzy.alej@gmail.com"
   gem.authors = ["Alejandro Andres"]
   # dependencies defined in Gemfile

@@ -4,6 +4,7 @@ require 'fabes/experiment'
 require 'fabes/alternative'
 require 'fabes/connection_handling'
 require 'fabes/helper'
+require 'fabes/admin'
 
 module Fabes
   extend self
@@ -21,3 +22,9 @@ module Fabes
 end
 
 Fabes.configure
+
+if defined? Rails
+  ActionController::Base.send :include, Fabes::Helper
+  ActionController::Base.helper Fabes::Helper
+  #TODO: Autoadd route to admin panel
+end

@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem 'redis'
+gem 'sinatra'
 
 group :development do
   gem "mocha"
