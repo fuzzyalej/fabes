@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %title= @title || 'Fabes Administration Panel'
+    %link{href: request.env['SCRIPT_NAME'] + '/application.css', media: 'all', rel: 'stylesheet', type: 'text/css'}
+  %body
+    #container
+      #header
+        .logo
+      #content
+        =yield

@@ -11,12 +11,17 @@ module Fabes
     end
 
     def self.find_or_create(name, *alternatives)
+      #TODO: What happens if same experiment but different alternatives?
       #TODO: check the validation of alternatives
       experiment = find(name) or new(name, *alternatives)
     end
 
     def self.find(name)
       Fabes.db.find_experiment name
+    end
+
+    def self.all
+      Fabes.db.all_experiments
     end
 
     def select_alternative!

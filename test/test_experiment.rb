@@ -69,4 +69,28 @@ class TestExperiment < Test::Unit::TestCase
       assert_nil experiment
     end
   end
+
+  context 'all' do
+    setup do
+      Fabes::Experiment.new 'test', 'a', 'b', 'c'
+      Fabes::Experiment.new 'test2', 1, 2, 3
+      @experiments = Fabes::Experiment.all
+    end
+
+    should 'find all experiments (class)' do
+      @experiments.each do |exp|
+        assert_equal exp.class, Fabes::Experiment
+      end
+    end
+
+    should 'find all experiments (name)' do
+      @experiments.map(&:name).each do |name|
+        assert %w(test test2).include?(name)
+      end
+    end
+
+    should 'find all experiments (count)' do
+      assert_equal @experiments.count, 2
+    end
+  end
 end

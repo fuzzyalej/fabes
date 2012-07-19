@@ -40,7 +40,20 @@ module Fabes
         @redis.hincrby "fabes:alternatives_pool:#{id}", 'participants', 1
       end
 
+      def all_experiments
+        experiments = Array.new
+        names = get_all_experiment_names
+        names.each do |name|
+          experiments << load_experiment(name)
+        end
+        experiments
+      end
+
       private
+
+      def get_all_experiment_names
+        @redis.smembers 'fabes:experiments'
+      end
 
       def add_to_current_experiments(name)
         @redis.sadd "fabes:experiments", name
