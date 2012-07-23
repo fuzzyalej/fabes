@@ -2,7 +2,7 @@ require 'helper'
 
 class TestExperiment < Test::Unit::TestCase
 
-  context 'name' do
+  context 'initialization' do
     should "have a name" do
       experiment = Fabes::Experiment.new 'test', 'yay'
       assert experiment.respond_to? :name
@@ -34,15 +34,22 @@ class TestExperiment < Test::Unit::TestCase
   end
 
   context 'alternative' do
+    setup do
+      @experiment = Fabes::Experiment.new 'test', 'yay'
+    end
+
     should 'be able to select an alternative' do
-      experiment = Fabes::Experiment.new 'test', 'yay'
-      assert experiment.respond_to? :select_alternative!
+      assert @experiment.respond_to? :select_alternative!
     end
 
     should 'return an alternative' do
-      experiment = Fabes::Experiment.new 'test', 'yay'
-      alternative = experiment.select_alternative!
+      alternative = @experiment.select_alternative!
       assert_equal alternative.class, Fabes::Alternative
+    end
+
+    should 'return a valid alternative' do
+      alternative = @experiment.select_alternative!
+      assert_equal alternative.payload, 'yay'
     end
   end
 
