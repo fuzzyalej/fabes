@@ -1,0 +1,12 @@
+=== Fabes ===
+
+= v0.0.1
+ - Improved the alternative selection, now using a basic 'epsilon-greedy' multi-armed bandit
+    # http://stevehanov.ca/blog/index.php?id=132
+    # http://www.cs.mcgill.ca/~vkules/bandits.pdf
+    # http://www.cs.nyu.edu/~mohri/pub/bandit.pdf
+
+ - Advancing with tests, though some love is needed
+
+= v0.0.0
+  - Basic implementation of the system, based on existing gems: split, vanity, some rails insights :)

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "fabes"
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alejandro Andres"]
-  s.date = "2012-07-18"
+  s.date = "2012-07-23"
   s.description = "Fabes is an A/B testing system for your ruby projects"
   s.email = "fuzzy.alej@gmail.com"
   s.extra_rdoc_files = [
@@ -25,7 +25,12 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "fabes.gemspec",
     "lib/fabes.rb",
+    "lib/fabes/admin.rb",
+    "lib/fabes/admin/public/application.css",
+    "lib/fabes/admin/views/index.haml",
+    "lib/fabes/admin/views/layout.haml",
     "lib/fabes/alternative.rb",
     "lib/fabes/configuration.rb",
     "lib/fabes/connection_adapters/abstract_adapter.rb",
