@@ -52,7 +52,7 @@ module Fabes
     private
 
     def exploration?
-      rand() < 0.1 # 10% of times
+      rand() < 0.2 # 20% of times
     end
 
     def random_alternative

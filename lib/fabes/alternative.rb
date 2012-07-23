@@ -5,7 +5,7 @@ module Fabes
 
     def initialize(payload)
       @id = generate_id
-      @weight = 0.1
+      @weight = 0.0
       @participants = 0
       @hits = 0
       @payload = payload

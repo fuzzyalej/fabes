@@ -41,7 +41,7 @@ module Fabes
       end
 
       def update_weight(id, weight)
-        @redis.set "fabes:alternatives_pool:#{id}:weight", weight
+        @redis.hset "fabes:alternatives_pool:#{id}", 'weight', weight
       end
 
       def all_experiments
