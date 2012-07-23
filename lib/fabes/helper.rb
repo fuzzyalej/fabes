@@ -6,6 +6,7 @@ module Fabes
         alternative = experiment.select_alternative!
         set_cookie_for experiment, alternative
         alternative.increment_participants!
+        alternative.update_weight
       else
         alternative = current_alternative_for experiment
       end
@@ -20,6 +21,7 @@ module Fabes
       alternative = current_alternative_for experiment
       if scorable? experiment.name
         alternative.increment_hits!
+        alternative.update_weight
         mark_as_scored experiment.name
       end
     rescue

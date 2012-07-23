@@ -47,7 +47,8 @@ class TestHelper < Test::Unit::TestCase
   context 'score' do
     setup do
       @experiment = Fabes::Experiment.new('test', 1, 2, 3)
-      tracking['test'] = @experiment.alternatives.first.id
+      @alternative = @experiment.alternatives.first
+      tracking['test'] = @alternative.id
     end
     should 'be able to finish an experiment' do
       assert self.respond_to? :score!

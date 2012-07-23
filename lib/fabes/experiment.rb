@@ -24,8 +24,13 @@ module Fabes
       Fabes.db.all_experiments
     end
 
+    #TODO: make this an option and add different alternative selection algorithms
     def select_alternative!
-      @alternatives.shuffle.first
+      if exploration?
+        random_alternative
+      else #exploitation
+        heaviest_alternative
+      end
     end
 
     def find_alternative(id)
@@ -42,6 +47,20 @@ module Fabes
 
     def control
       @alternatives.first
+    end
+
+    private
+
+    def exploration?
+      rand() < 0.1 # 10% of times
+    end
+
+    def random_alternative
+      @alternatives.shuffle.first
+    end
+
+    def heaviest_alternative
+      @alternatives.max {|alternative| alternative.weight}
     end
   end
 end

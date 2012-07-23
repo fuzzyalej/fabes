@@ -5,7 +5,7 @@ module Fabes
 
     def initialize(payload)
       @id = generate_id
-      @weight = 1
+      @weight = 0.1
       @participants = 0
       @hits = 0
       @payload = payload
@@ -21,6 +21,11 @@ module Fabes
       Fabes.db.increment_hits!(id)
     end
 
+    def update_weight
+      @weight = calculate_weight
+      Fabes.db.update_weight(id, @weight)
+    end
+
     def self.create_from(data)
       alternative = new(data.delete :payload)
       data.each do |k, v|
@@ -31,11 +36,19 @@ module Fabes
       raise 'Error creating an alternative'
     end
 
+    def weight
+      @weight.to_f
+    end
+
     private
 
     def generate_id
       #TODO: maybe this could be easier with a redis counter?
       rand(36**10).to_s(36)
+    end
+
+    def calculate_weight
+      @hits.to_f / @participants.to_f
     end
   end
 end

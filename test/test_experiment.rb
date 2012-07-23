@@ -35,7 +35,7 @@ class TestExperiment < Test::Unit::TestCase
 
   context 'alternative' do
     setup do
-      @experiment = Fabes::Experiment.new 'test', 'yay'
+      @experiment = Fabes::Experiment.new 'test', 'yay', 'yey'
     end
 
     should 'be able to select an alternative' do
@@ -49,7 +49,16 @@ class TestExperiment < Test::Unit::TestCase
 
     should 'return a valid alternative' do
       alternative = @experiment.select_alternative!
-      assert_equal alternative.payload, 'yay'
+      assert alternative.payload.match /y?y/
+    end
+
+    should 'shuffle when exploration'
+
+    should 'select the heaviest when exploitation' do
+      @experiment.alternatives.first.weight = 0.1
+      @experiment.stubs(:exploration?).returns(:false)
+      alternative = @experiment.select_alternative!
+      assert_not_equal alternative.id, @experiment.alternatives.first
     end
   end
 

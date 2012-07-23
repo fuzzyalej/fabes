@@ -40,6 +40,10 @@ module Fabes
         @redis.hincrby "fabes:alternatives_pool:#{id}", 'participants', 1
       end
 
+      def update_weight(id, weight)
+        @redis.set "fabes:alternatives_pool:#{id}:weight", weight
+      end
+
       def all_experiments
         experiments = Array.new
         names = get_all_experiment_names

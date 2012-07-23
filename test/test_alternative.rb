@@ -10,7 +10,7 @@ class TestAlternative < Test::Unit::TestCase
     should 'have a weight' do
       alternative = Fabes::Alternative.new 'abc'
       assert_not_nil alternative.weight
-      assert_equal alternative.weight, 1
+      assert_equal alternative.weight, 0.1
     end
 
     should 'have a payload' do
@@ -49,6 +49,19 @@ class TestAlternative < Test::Unit::TestCase
       assert_equal alternative.hits, 0
       alternative.increment_hits!
       assert_equal alternative.hits, 1
+    end
+  end
+
+  context 'update_weight' do
+    should 'be able to update the weight'
+
+    should 'calculate the new weight' do
+      alternative = Fabes::Alternative.new 'abc'
+      alternative.participants = 10
+      alternative.hits = 1
+      alternative.update_weight
+
+      assert_equal alternative.weight, 0.1
     end
   end
 
