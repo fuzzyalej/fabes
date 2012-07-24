@@ -52,7 +52,7 @@ module Fabes
     private
 
     def exploration?
-      rand() < 0.2 # 20% of times
+      rand() < Fabes.configuration.factor.to_f
     end
 
     def random_alternative
