@@ -2,8 +2,8 @@ module Fabes
   module ConnectionHandling
     def self.redis_connection(db)
       require 'redis'
-      db ||= ::Redis.new
-      ConnectionAdapters::RedisAdapter.new(db)
+      redis = ::Redis.new db
+      ConnectionAdapters::RedisAdapter.new redis
     end
   end
 

@@ -15,6 +15,7 @@ class TestRedisAdapter < Test::Unit::TestCase
     setup do
       @db = Redis.new
       @adapter = Fabes::ConnectionAdapters::RedisAdapter.new(@db)
+      Fabes.stubs(:db).returns(@adapter)
       @experiment = Fabes::Experiment.new 'test', 'a', 'b', 'c'
       @adapter.save_experiment(@experiment)
     end

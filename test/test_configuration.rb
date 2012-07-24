@@ -2,9 +2,9 @@ require 'helper'
 
 class TestConfiguration < Test::Unit::TestCase
   context 'initialization' do
-    should 'have an adapter' do
+    should 'have a database' do
       configuration = Fabes::Configuration.new
-      assert configuration.respond_to? :adapter
+      assert configuration.respond_to? :database
     end
   end
 
@@ -14,20 +14,18 @@ class TestConfiguration < Test::Unit::TestCase
       assert configuration.respond_to? :use
     end
 
-    should 'set the adapter' do
+    should 'set the database' do
       configuration = Fabes.configure do |c|
-        c.use db: 'abc', adapter: :redis
+        c.use database: 'redis://user:pwd@host.com:123/'
       end
-      assert_not_nil configuration.instance_variable_get :@adapter
-      assert_equal configuration.instance_variable_get(:@adapter), 'redis'
+      assert_not_nil configuration.instance_variable_get :@database
     end
 
-    should 'set the db' do
+    should 'nilify the db with bad configuration' do
       configuration = Fabes.configure do |c|
-        c.use db: 'abc', adapter: :redis
+        c.use fail: 'redis://user:pwd@host.com:123/'
       end
-      assert_not_nil configuration.instance_variable_get(:@db)
-      assert_equal configuration.instance_variable_get(:@db), 'abc'
+      assert_nil configuration.instance_variable_get :@database
     end
   end
 end

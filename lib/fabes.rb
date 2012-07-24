@@ -17,7 +17,7 @@ module Fabes
   end
 
   def db
-    @db ||= ConnectionHandling.establish_connection Fabes.configuration.db, Fabes.configuration.adapter
+    @db ||= ConnectionHandling.establish_connection Fabes.configuration.database
   end
 end
 

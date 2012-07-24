@@ -1,17 +1,31 @@
 module Fabes
   module ConnectionHandling
+    require 'ostruct'
     extend self
 
-    def establish_connection(db, adapter)
-      #TODO: automagically parse db a la rails
-      #REF: https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_handling.rb
+    def establish_connection(db)
+      database = connection_url_to_hash(db)
+      adapter = database.delete :adapter
       adapter_method = "#{adapter}_connection"
-      send adapter_method, db
-    rescue => e
+      send adapter_method, database
+    rescue
       raise "Could not find #{adapter} adapter!"
     end
 
-    def parse_connection_url(url)
+    #from https://github.com/rails/rails/blob/master/activerecord/lib/active_record/connection_adapters/connection_specification.rb#L65
+    def connection_url_to_hash(url)
+      url ||= ''
+      uri = URI.parse url
+      spec = {
+        host:     uri.host,
+        port:     uri.port,
+        adapter:  uri.scheme,
+        username: uri.user,
+        password: uri.password,
+        database: uri.path.sub(%r{^/}, '')
+      }
+      spec.reject! {|_, value| !value}
+      {adapter: 'redis'}.merge spec
     end
   end
 
