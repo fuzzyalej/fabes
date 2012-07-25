@@ -23,9 +23,4 @@ end
 
 Fabes.configure
 
-if defined? Rails
-  ActionController::Base.send :include, Fabes::Helper
-  ActionController::Base.helper Fabes::Helper
-  #TODO: Autoadd route to admin panel
-  #TODO: Railtie???
-end
+require 'fabes/railtie' if defined? Rails

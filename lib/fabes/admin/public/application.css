@@ -1,7 +1,8 @@
 body {
-  font: normal 12px auto Verdana, Arial, Helvetica, sans-serif;
-  color: #FDF3E7;
-  background: #3B3738;
+  font-family: 'trebuchet MS', 'Lucida sans', Arial, sans-serif;
+  font-size: 14px;
+  color: #3b3b3b;
+  background-image: url('http://subtlepatterns.com/patterns/fabric_plaid.png');
 }
 
 a {
@@ -18,38 +19,103 @@ h2.span {
   font-size: 16px;
 }
 
+#logo {
+  margin-bottom: 25px;
+}
+
+#logo h1 {
+  font-family: Arial, sans-serif;
+  font-size: 75px;
+  margin: 25px 0 0 0;
+  color: #504f4f;
+  text-shadow: 0px 2px 1px #bbbaba;
+}
+
+#logo span {
+  text-shadow: 0px 1px 1px #bbbaba;
+}
+
 table {
   width: 700px;
   padding: 0px;
   margin: 0px;
+  border: solid 1px #999;
+  *border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -wekit-border-radius: 6px;
+  box-shadow: 0 1px 1px #999;
+  -webkit-box-shadow: 0 1px 1px #999;
+  -moz-box-shadow: 0 1px 1px #999;
 }
 
 th {
-  border-right: 1px solid #A64C2E;
-  border-bottom: 1px solid #A64C2E;
-  border-top: 1px solid #D53500;
-  border-left: 1px solid #D53500;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
   font-size: 13px;
   padding: 10px;
-  background: #C63D0F;
   color: #FFFFFF;
+  background-color: #C63D0F;
+  background-image: linear-gradient(top, #c63d0f, #6f1b00);
+  background-image: -webkit-linear-gradient(top, #c63d0f, #6f1b00);
+  background-image: -moz-linear-gradient(top, #c63d0f, #6f1b00);
   text-shadow: 1px 1px 1px black;
+  box-shadow: 0 1px 0 rgba(255, 200, 200, .8) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255, 200, 200, .8) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 200, 200, .8) inset;
+}
+
+th:first-child {
+  background-color: #C63D0F;
+  background-image: linear-gradient(top, #c63d0f, #6f1b00)
+  background-image: -webkit-linear-gradient(top, #c63d0f, #6f1b00);
+  background-image: -moz-linear-gradient(top, #c63d0f, #6f1b00);
+  -moz-border-radius: 6px 0 0 0;
+  -webkit-border-radius: 6px 0 0 0;
+  border-radius: 6px 0 0 0;
+}
+
+th:last-child {
+  -moz-border-radius: 0 6px 0 0;
+  -webkit-border-radius: 0 6px 0 0;
+  border-radius: 0 6px 0 0;
 }
 
 td {
   border-right: 1px solid #C1DAD7;
   border-bottom: 1px solid #C1DAD7;
-  background: #FDF3E7;
   padding: 6px;
   color: #3B3738;
-  font-size: 13px;
+}
+
+td:first-child {
+  font-weight: bold;
+}
+
+tr {
+  background: white;
+}
+
+tr:last-child td:first-child {
+  border-radius: 0 0 0 6px;
+  -moz-border-radius: 0 0 0 6px;
+  -webkit-border-radius: 0 0 0 6px;
+}
+
+tr:last-child td:last-child {
+  border-radius: 0 0 6px 0;
+  -moz-border-radius: 0 0 6px 0;
+  -webkit-border-radius: 0 0 6px 0;
+}
+
+tr:hover {
+  background: #FBF8E9;
 }
 
 #container {
-  margin: 50px auto;
+  margin: 0 auto;
   text-align: center;
   overflow: hidden;
 }

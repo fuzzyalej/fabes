@@ -5,7 +5,8 @@
     %link{href: request.env['SCRIPT_NAME'] + '/application.css', media: 'all', rel: 'stylesheet', type: 'text/css'}
   %body
     #container
-      #header
-        .logo
+      #logo
+        %h1 Fabes
+        %span Fabulous A/B Experimentation System
       #content
         =yield

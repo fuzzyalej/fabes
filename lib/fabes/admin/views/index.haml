@@ -4,14 +4,16 @@
     .experiment
       %h2= "Experiment: #{name.capitalize}"
       %table{id: name.first, cellspacing: 0, summary: "Data for experiment '#{name}'"}
-        %tr
-          %th{scope: 'col'} Alternative
-          %th{scope: 'col'} Participants
-          %th{scope: 'col'} Hits
-          %th{scope: 'col'} Weight
-        - experiment.alternatives.each do |alternative|
+        %thead
           %tr
-            %td{title: alternative.id}= alternative.payload
-            %td= alternative.participants
-            %td= alternative.hits
-            %td= alternative.weight
+            %th{scope: 'col'} Alternative
+            %th{scope: 'col'} Participants
+            %th{scope: 'col'} Hits
+            %th{scope: 'col'} Weight
+        %tbody
+          - experiment.alternatives.each do |alternative|
+            %tr
+              %td{title: alternative.id}= alternative.payload
+              %td= alternative.participants
+              %td= alternative.hits
+              %td= alternative.weight
